@@ -13,14 +13,18 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-  res.render('login');
+  res.render('login', {error : req.flash('error')} );
 });
 
 router.get('/feed', function(req, res, next) {
   res.render('feed', );
 });
 
-router.get('/profile', isLoggedIn , function(req, res, next) {
+router.get('/profile', isLoggedIn , async function(req, res, next) {
+  const user = await userModel.findOne({
+    username : req.session.passport.user 
+  })
+  console.log(user);
   res.render("profile");
 });
 
@@ -39,7 +43,8 @@ router.post("/register",function(req,res){
 
 router.post("/login",passport.authenticate("local",{
   successRedirect: "/profile",
-  failureRedirect: "/login"
+  failureRedirect: "/login",
+  failureFlash : true 
 }),function(req,res){
 });
 
