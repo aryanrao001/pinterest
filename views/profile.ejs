@@ -14,21 +14,30 @@
           <div class="profile-picture">
             <img src="https://images.unsplash.com/photo-1729167318434-5cefa05fa3ad?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2OXx8fGVufDB8fHx8fA%3D%3D" alt="Profile Picture">
           </div>
-          <h2 class="name">username</h2>
-          <h3 class="username">@email</h3>
+          <h2 class="name"><%= user.username %></h2>
+          <h3 class="username"><%= user.email %></h3>
+          <h3 class="username"><%= user.fullName %></h3>
           <p class="tagline">Keep going.</p>
           <p class="description">Masih belajar CSS dan HTML.</p>
           <a href="/logout" class="button">Log out </a>
+          <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="text" name="filecaption" placeholder="imagecaption">
+            <input type="file" name="file" >
+            <input type="submit">
+          </form>
         </div>
     </div>
-    <div class="container">
-        <div class="card" style="width: 18rem;">
-            <img src="https://images.unsplash.com/photo-1729148074715-78de89a6bed2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMjh8fHxlbnwwfHx8fHw%3D" class="card-img-top" alt="...">
+    <div class="container" style="display: flex;padding: 1vw ;" >
+          <% user.posts.forEach(function(post){%>
+          <div class="card" style="width: 18rem;">
+            <img src="/images/uploads/<%= post.image %>" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <a href="#" class="btn btn-primary">All Pins </a>
+              <h5 class="card-title"><%= post.imageText  %></h5>
+              <!-- <a href="#" class="btn btn-primary"> All pins </a> -->
             </div>
           </div>
+
+          <% }) %>
     </div>
 
 </body>

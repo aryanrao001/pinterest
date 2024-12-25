@@ -157,4 +157,7 @@ hr {
 
 
 
-
+.error{
+  color: red;
+  padding: 2vw 0 ;
+}
